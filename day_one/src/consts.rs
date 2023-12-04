@@ -1000,3 +1000,13 @@ pub const PROBLEM_ONE_PAYLOAD: [&str; 1000] = [
 "fiveeight792eightqskstrftdpccsrgskrhc",
 "26fmrrhhpthree6b"
 ];
+
+pub const PROBLEM_TWO_TEST_PAYLOAD: [&str; 7] = [
+"two1nine",
+"eightwothree",
+"abcone2threexyz",
+"xtwone3four",
+"4nineeightseven2",
+"zoneight234",
+"7pqrstsixteen",
+];
