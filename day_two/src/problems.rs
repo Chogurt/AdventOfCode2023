@@ -43,5 +43,33 @@ pub fn problem_one(input: &str) {
         }
         valid_sum += game_id_to_add;
     }
-    println!("{:?}", valid_sum);
+    println!("Problem 1: {:?}", valid_sum);
+}
+
+pub fn problem_two(input: &str) {
+    let mut valid_sum: i32 = 0; 
+    let regex: Regex = Regex::new(r"(Game).*").unwrap();
+    for (index, game_str) in regex.find_iter(input).enumerate() {
+        let mut game: Vec<String> = split_string(":", game_str.as_str());
+        let game_data_as_str = game[1].to_string();
+        let mut remove_empty_space_iterator = game_data_as_str.chars();
+        remove_empty_space_iterator.next();
+        game[1] = remove_empty_space_iterator.as_str().to_string();
+        let mut min_red: i32 = 0;
+        let mut min_green: i32 = 0;
+        let mut min_blue: i32 = 0;
+        let game_data: &str = game[1].as_str();
+        for round_data in game_data.split(';'){
+            let colors: Vec<String> = split_string(",", round_data);
+            for color in colors.iter(){
+                let mut final_split = split_string(" ", color.as_str());
+                final_split.retain(|x| x != "");
+                if(final_split[1] == "red" && final_split[0].parse::<i32>().unwrap() > min_red) {min_red = final_split[0].parse::<i32>().unwrap()}
+                else if(final_split[1] == "green" && final_split[0].parse::<i32>().unwrap() > min_green){min_green = final_split[0].parse::<i32>().unwrap()}
+                else if(final_split[1] == "blue" && final_split[0].parse::<i32>().unwrap() > min_blue){min_blue = final_split[0].parse::<i32>().unwrap()}
+            }
+        }
+        valid_sum += min_red  * min_green * min_blue;
+    }
+    println!("Problem 2: {:?}", valid_sum);
 }
